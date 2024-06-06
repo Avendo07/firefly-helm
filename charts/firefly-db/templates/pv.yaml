@@ -1,0 +1,16 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Chart.Name }}-pv-volume
+  labels:
+    type: local
+    app: {{ .Chart.Name }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.storage.pvSize }}
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: {{ .Values.storage.pvLocation }}
+  persistentVolumeReclaimPolicy: Retain
